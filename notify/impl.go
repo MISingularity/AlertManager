@@ -542,7 +542,7 @@ func (n *YunPianSMS) Notify(ctx context.Context, as ...*types.Alert) error {
 	req := make(url.Values)
 	req.Set("apikey", n.conf.YunPianSMSapikey)
 	req.Set("mobile", n.conf.Mobile)
-	req.Set("test", n.conf.Text)
+	req.Set("text", n.conf.Text)
 
 	if err != nil {
 		return fmt.Errorf("unexpected e0rror creating body from template %v ", err.Error())

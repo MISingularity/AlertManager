@@ -196,17 +196,11 @@ func (c *Config) UnmarshalYAML(unmarshal func(interface{}) error) error {
 				YunPianSMS.apikey = c.Global.YunPianSMSapikey
 			}
 
-			if YunPianSMS.tplid == "" {
-				if c.Global.YunPianSMStplid == "" {
-					return fmt.Errorf("no global YunPianSMS tplid set")
-				}
-				YunPianSMS.tplid = c.Global.YunPianSMStplid
-			}
-
 			if YunPianSMS.mobile == "" {
 				if c.Global.Mobile == "" {
 					return fmt.Errorf("no global YunPianSMS mobile number set")
 				}
+				YunPianSMS.mobile = c.Global.Mobile
 			}
 		}
 
@@ -336,7 +330,6 @@ type GlobalConfig struct {
 	SMSAccountSID    string `yaml:"sms_account_sid"`
 	SMSAccountToken  Secret `yaml:"sms_account_token"`
 	YunPianSMSapikey string `yaml:"YunPian_sms_apikey"`
-	YunPianSMStplid  string `yaml:"YunPian_sms_tplid"`
 	Mobile           slice  `yaml:"YunPian_sms_Mobile"`
 	HipchatAuthToken Secret `yaml:"hipchat_auth_token"`
 	OpsGenieAPIHost  string `yaml:"opsgenie_api_host"`

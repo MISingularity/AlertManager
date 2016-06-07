@@ -296,7 +296,7 @@ func (c *SMSConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 type YunPianConfig struct {
 	NotifierConfig `yaml:",inline"`
 	//YunPian apikey
-	apikey string `yaml:"YunPian_sms_apikey"`
+	Apikey string `yaml:"YunPian_sms_apikey"`
 	// number to which sms has to be sent
 	Mobile slice  `yaml:"YunPian_sms_Mobile"`
 	Text   string `yaml:"text"`
@@ -319,6 +319,12 @@ func (c *YunPianConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	type plain SMSConfig
 	if err := unmarshal((*plain)(c)); err != nil {
 		return err
+	}
+	if c.Apikey == "" {
+		return fmt.Errorf("missing Apikey  in YunPian config")
+	}
+	if c.Mobile == "" {
+		return fmt.Errorf("missing Mobile number in YunPian config")
 	}
 	return checkOverflow(c.XXX, "YunPianSMS config")
 }
