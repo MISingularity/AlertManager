@@ -37,7 +37,7 @@ import (
 	"github.com/prometheus/alertmanager/provider/boltmem"
 	"github.com/prometheus/alertmanager/template"
 	"github.com/prometheus/alertmanager/types"
-	"github.com/prometheus/alertmanager/version"
+	"github.com/prometheus/common/version"
 )
 
 var (
@@ -66,15 +66,18 @@ var (
 func init() {
 	prometheus.MustRegister(configSuccess)
 	prometheus.MustRegister(configSuccessTime)
+	prometheus.MustRegister(version.NewCollector("alertmanager"))
 }
 
 func main() {
 	flag.Parse()
 
-	printVersion()
 	if *showVersion {
+		fmt.Fprintln(os.Stdout, version.Print("alertmanager"))
 		os.Exit(0)
 	}
+	log.Infoln("Starting alertmanager", version.Info())
+	log.Infoln("Build context", version.BuildContext())
 
 	err := os.MkdirAll(*dataDir, 0777)
 	if err != nil {

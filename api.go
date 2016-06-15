@@ -29,7 +29,7 @@ import (
 
 	"github.com/prometheus/alertmanager/provider"
 	"github.com/prometheus/alertmanager/types"
-	"github.com/prometheus/alertmanager/version"
+	"github.com/prometheus/common/version"
 )
 
 var (
@@ -135,7 +135,14 @@ func (api *API) status(w http.ResponseWriter, req *http.Request) {
 		Uptime      time.Time         `json:"uptime"`
 	}{
 		Config:      api.config,
-		VersionInfo: version.Map,
+		VersionInfo: map[string]string{
+			"version":   version.Version,
+			"revision":  version.Revision,
+			"branch":    version.Branch,
+			"buildUser": version.BuildUser,
+			"buildDate": version.BuildDate,
+			"goVersion": version.GoVersion,
+		},
 		Uptime:      api.uptime,
 	}
 
