@@ -32,8 +32,8 @@ import (
 	"github.com/prometheus/common/log"
 	"github.com/prometheus/common/route"
 
-	"github.com/prometheus/alertmanager/config"
-	"github.com/prometheus/alertmanager/notify"
+	"github.com/MISingularity/AlertManager/config"
+	"github.com/MISingularity/AlertManager/notify"
 	"github.com/prometheus/alertmanager/provider/boltmem"
 	"github.com/prometheus/alertmanager/template"
 	"github.com/prometheus/alertmanager/types"
@@ -212,22 +212,6 @@ func main() {
 	log.Infoln("Received SIGTERM, exiting gracefully...")
 }
 
-var versionInfoTmpl = `
-alertmanager, version {{.version}} (branch: {{.branch}}, revision: {{.revision}})
-  build user:       {{.buildUser}}
-  build date:       {{.buildDate}}
-  go version:       {{.goVersion}}
-`
-
-func printVersion() {
-	t := tmpltext.Must(tmpltext.New("version").Parse(versionInfoTmpl))
-
-	var buf bytes.Buffer
-	if err := t.ExecuteTemplate(&buf, "version", version.Map); err != nil {
-		panic(err)
-	}
-	fmt.Fprintln(os.Stdout, strings.TrimSpace(buf.String()))
-}
 
 func extURL(s string) (*url.URL, error) {
 	if s == "" {
