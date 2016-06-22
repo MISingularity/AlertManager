@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
 // http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -330,7 +329,7 @@ type GlobalConfig struct {
 	SMSAccountSID    string `yaml:"sms_account_sid"`
 	SMSAccountToken  Secret `yaml:"sms_account_token"`
 	YunPianSMSapikey string `yaml:"YunPian_sms_apikey"`
-	Mobile           slice  `yaml:"YunPian_sms_Mobile"`
+	Mobile           string  `yaml:"YunPian_sms_Mobile"`
 	HipchatAuthToken Secret `yaml:"hipchat_auth_token"`
 	OpsGenieAPIHost  string `yaml:"opsgenie_api_host"`
 	SuffixUsername   string `yaml:"suffix_username"`

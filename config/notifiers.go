@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
 // http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -305,15 +304,6 @@ type YunPianConfig struct {
 	XXX map[string]interface{} `yaml:",inline"`
 }
 
-// UnmarshalYAML implements the yaml.Unmarshaler interface.
-func (c *CallConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
-	*c = DefaultCallConfig
-	type plain CallConfig
-	if err := unmarshal((*plain)(c)); err != nil {
-		return err
-	}
-	return checkOverflow(c.XXX, "Call config")
-}
 func (c *YunPianConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	*c = DefaultSMSConfig
 	type plain SMSConfig
