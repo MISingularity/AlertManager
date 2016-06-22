@@ -330,7 +330,7 @@ type GlobalConfig struct {
 	SMSAccountSID    string `yaml:"sms_account_sid"`
 	SMSAccountToken  Secret `yaml:"sms_account_token"`
 	YunPianSMSapikey string `yaml:"YunPian_sms_apikey"`
-	Mobile           slice  `yaml:"YunPian_sms_Mobile"`
+	Mobile           string  `yaml:"YunPian_sms_Mobile"`
 	HipchatAuthToken Secret `yaml:"hipchat_auth_token"`
 	OpsGenieAPIHost  string `yaml:"opsgenie_api_host"`
 	SuffixUsername   string `yaml:"suffix_username"`

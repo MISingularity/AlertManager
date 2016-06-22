@@ -305,15 +305,6 @@ type YunPianConfig struct {
 	XXX map[string]interface{} `yaml:",inline"`
 }
 
-// UnmarshalYAML implements the yaml.Unmarshaler interface.
-func (c *CallConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
-	*c = DefaultCallConfig
-	type plain CallConfig
-	if err := unmarshal((*plain)(c)); err != nil {
-		return err
-	}
-	return checkOverflow(c.XXX, "Call config")
-}
 func (c *YunPianConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	*c = DefaultSMSConfig
 	type plain SMSConfig
